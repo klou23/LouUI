@@ -68,3 +68,13 @@ const std::string &LouUI::Component::getName() const {
 void LouUI::Component::setName(const std::string &name) {
     Component::name = name;
 }
+
+LouUI::Component::Component(const std::string &name) : name(name) {}
+
+LouUI::Screen *LouUI::Component::getParent() const {
+    return parent;
+}
+
+void LouUI::Component::setParent(LouUI::Screen *parent) {
+    Component::parent = parent;
+}

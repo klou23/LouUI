@@ -42,12 +42,13 @@ namespace LouUI {
     private:
         lv_obj_t* page;
         std::string name;
-        std::vector<Component> components;
+        std::vector<Component*> components;
     public:
         /**
          * Constructs a new page with the given page object.
          * This constructor is called by the display whenever a new Screen is
          * made
+         *
          * @param page The lvgl page object
          */
         Screen(lv_obj_t* page);
@@ -73,11 +74,27 @@ namespace LouUI {
         void setName(const std::string &name);
 
         /**
-         * Adds a new component to the screen.
-         * Newly added components will be placed on top of old components
-         * @param c The component to be added
+         * Adds a new component to the Screen with a given name.
+         *
+         * @param name name of the component to be added. This name should be
+         * unique
          */
-        void addComponent(Component c);
+        void addComponent(std::string name);
+
+        /**
+         * Gets the number of components
+         *
+         * @return the number of components
+         */
+        int getComponentCount();
+
+        /**
+         * Gets the pointer to the component
+         *
+         * @param name Name of the component to return
+         * @return a pointer to the
+         */
+        Component* getComponent(std::string name);
     };
 }
 

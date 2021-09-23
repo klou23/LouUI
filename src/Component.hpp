@@ -30,7 +30,7 @@
 #ifndef LOUUI_COMPONENT_HPP
 #define LOUUI_COMPONENT_HPP
 
-
+#include "Screen.hpp"
 #include <string>
 
 namespace LouUI {
@@ -42,8 +42,12 @@ namespace LouUI {
         int width;
         int height;
         std::string name;
+        lv_obj_t* obj;
+        Screen* parent;
 
     public:
+
+        Component(const std::string &name);
 
         int getX() const;
 
@@ -64,6 +68,10 @@ namespace LouUI {
         const std::string &getName() const;
 
         void setName(const std::string &name);
+
+        Screen *getParent() const;
+
+        void setParent(Screen *parent);
     };
 }
 

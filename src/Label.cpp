@@ -1,10 +1,10 @@
 /**
- * @file Screen.cpp
- * @brief Screen class that works like a tab in the display
- * @details Implementation file for the screen class, that will contain all of
- * the UI contents. It acts like a lvgl page.
+ * @file Label.cpp
+ * @brief Label class that is used to represent text labels
+ * @details Implementation file for the Label class, which is a type of
+ * Component that displays a text string. It is a type of lvgl object
  * @author Kevin Lou
- * @date September 3, 2021
+ * @date September 23, 2021
  *
  * Copyright (c) 2021 Kevin Lou
  *
@@ -27,40 +27,7 @@
  * SOFTWARE.
  */
 
-#include "Screen.hpp"
+#include "Label.hpp"
 
 
-LouUI::Screen::Screen(lv_obj_t *page) : page(page) {}
-
-lv_obj_t *LouUI::Screen::getPage() const {
-    return page;
-}
-
-void LouUI::Screen::setPage(lv_obj_t *page) {
-    Screen::page = page;
-}
-
-const std::string &LouUI::Screen::getName() const {
-    return name;
-}
-
-void LouUI::Screen::setName(const std::string &name) {
-    Screen::name = name;
-}
-
-int LouUI::Screen::getComponentCount() {
-    return components.size();
-}
-
-LouUI::Component *LouUI::Screen::getComponent(std::string name) {
-    for(auto component : components){
-        if(component->getName() == name) return component;
-    }
-    return nullptr;
-}
-
-void LouUI::Screen::addComponent(std::string name) {
-    Component* component = new Component(name);
-    component->setParent(this);
-    components.push_back(component);
-}
+Label::Label(const std::string &text) : text(text) {}

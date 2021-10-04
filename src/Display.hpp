@@ -30,10 +30,10 @@
 #ifndef LOUUI_DISPLAY_HPP
 #define LOUUI_DISPLAY_HPP
 
-#include "main.h"
+#include <vector>
+
 #include "../include/display/lv_core/lv_obj.h"
 #include "Screen.hpp"
-#include <vector>
 
 
 namespace LouUI {

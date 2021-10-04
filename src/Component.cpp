@@ -69,12 +69,45 @@ void LouUI::Component::setName(const std::string &name) {
     Component::name = name;
 }
 
-LouUI::Component::Component(const std::string &name) : name(name) {}
+LouUI::Component::Component(std::string name) : name(std::move(name)) {
+    x = 0;
+    y = 0;
+    width = 0;
+    height = 0;
+    obj = nullptr;
+    parent = nullptr;
+}
 
-LouUI::Screen *LouUI::Component::getParent() const {
+lv_obj_t *LouUI::Component::getObj() const {
+    return obj;
+}
+
+void LouUI::Component::setObj(lv_obj_t *obj) {
+    Component::obj = obj;
+}
+
+LouUI::Component::Component(std::string name, lv_obj_t *parent) :
+                            name(std::move(name)), parent(parent) {
+    obj = nullptr;
+}
+
+LouUI::Component::Component(std::string name, lv_obj_t *parent, int x, int y) :
+                            name(std::move(name)), parent(parent), x(x), y(y){
+    obj = nullptr;
+}
+
+LouUI::Component::Component(std::string name, lv_obj_t *parent, int x,
+                            int y, int width, int height) :
+                            name(std::move(name)), parent(parent), x(x), y(x),
+                            width(width), height(height){
+    obj = nullptr;
+}
+
+lv_obj_t *LouUI::Component::getParent() const {
     return parent;
 }
 
-void LouUI::Component::setParent(LouUI::Screen *parent) {
+void LouUI::Component::setParent(lv_obj_t *parent) {
     Component::parent = parent;
 }
+

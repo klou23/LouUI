@@ -61,6 +61,6 @@ LouUI::Component *LouUI::Screen::getComponent(std::string name) {
 
 void LouUI::Screen::addComponent(std::string name) {
     Component* component = new Component(name);
-    component->setParent(this);
+    component->setParent(page);
     components.push_back(component);
 }

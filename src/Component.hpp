@@ -30,8 +30,10 @@
 #ifndef LOUUI_COMPONENT_HPP
 #define LOUUI_COMPONENT_HPP
 
-#include "Screen.hpp"
 #include <string>
+#include <utility>
+
+#include "../include/display/lvgl.h"
 
 namespace LouUI {
     class Component {
@@ -43,11 +45,18 @@ namespace LouUI {
         int height;
         std::string name;
         lv_obj_t* obj;
-        Screen* parent;
+        lv_obj_t* parent;
 
     public:
 
-        Component(const std::string &name);
+        Component(std::string name);
+
+        Component(std::string name, lv_obj_t *parent);
+
+        Component(std::string name, lv_obj_t *parent, int x, int y);
+
+        Component(std::string name, lv_obj_t *parent, int x, int y, int width,
+                  int height);
 
         int getX() const;
 
@@ -69,9 +78,13 @@ namespace LouUI {
 
         void setName(const std::string &name);
 
-        Screen *getParent() const;
+        lv_obj_t *getObj() const;
 
-        void setParent(Screen *parent);
+        void setObj(lv_obj_t *obj);
+
+        lv_obj_t *getParent() const;
+
+        void setParent(lv_obj_t *parent);
     };
 }
 

@@ -29,5 +29,47 @@
 
 #include "Label.hpp"
 
+#include <utility>
 
-Label::Label(const std::string &text) : text(text) {}
+
+LouUI::Label::Label(std::string name) : Component(std::move(name)) {
+
+}
+
+LouUI::Label::Label(std::string name, lv_obj_t *parent) :
+        Component(std::move(name), parent) {
+
+}
+
+LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y) :
+        Component(std::move(name), parent, x, y) {
+
+}
+
+LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y, int width,
+                    int height) :
+        Component(std::move(name), parent, x, y, width, height) {
+
+}
+
+LouUI::Label::Label(std::string name, std::string text) : Component(std::move(name)),
+                    text(std::move(text)){
+
+}
+
+LouUI::Label::Label(std::string name, lv_obj_t *parent, std::string text) :
+        Component(std::move(name), parent), text(std::move(text)){
+
+}
+
+LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y,
+                    std::string text) : Component(std::move(name), parent, x, y),
+                    text(std::move(text)){
+
+}
+
+LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y, int width,
+                    int height, std::string text) :
+        Component(std::move(name), parent, x, y, width, height), text(std::move(text)){
+
+}

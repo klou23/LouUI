@@ -30,15 +30,36 @@
 #ifndef LOUUI_LABEL_HPP
 #define LOUUI_LABEL_HPP
 
-#include "Component.hpp"
 #include <string>
+#include <utility>
 
-class Label : public Component {
-private:
-    std::string text;
-public:
-    Label(const std::string &text);
-};
+#include "Component.hpp"
+
+namespace LouUI {
+    class Label : public Component {
+    private:
+        std::string text;
+    public:
+        Label(std::string name);
+
+        Label(std::string name, lv_obj_t *parent);
+
+        Label(std::string name, lv_obj_t *parent, int x, int y);
+
+        Label(std::string name, lv_obj_t *parent, int x, int y, int width,
+              int height);
+
+        Label(std::string name, std::string text);
+
+        Label(std::string name, lv_obj_t *parent, std::string text);
+
+        Label(std::string name, lv_obj_t *parent, int x, int y,
+              std::string text);
+
+        Label(std::string name, lv_obj_t *parent, int x, int y, int width,
+              int height, std::string text);
+    };
+}
 
 
 #endif //LOUUI_LABEL_HPP

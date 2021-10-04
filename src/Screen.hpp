@@ -32,7 +32,7 @@
 
 #include <string>
 #include <vector>
-#include "main.h"
+
 #include "Component.hpp"
 #include "../include/display/lv_core/lv_obj.h"
 

@@ -44,46 +44,121 @@ namespace LouUI {
         int width;
         int height;
         std::string name;
-        lv_obj_t* obj;
-        lv_obj_t* parent;
+        lv_obj_t *obj;
+        lv_obj_t *parent;
 
     public:
+        /**
+         * Creates a new Component
+         * @warning this constructor should generally should not be used as
+         * it does not have a parent object
+         * @param name name of the component to be created. This name should
+         * be unique
+         */
+        explicit Component(std::string name);
 
-        Component(std::string name);
-
+        /**
+         * Creates a new Component
+         * @param name name of the component to be created. This name should
+         * be unique
+         * @param parent pointer to the parent lvgl object for this component.
+         * This should not be null
+         */
         Component(std::string name, lv_obj_t *parent);
 
+        /**
+         * Creates a new Component
+         * @param name name of the component to be created. This name should
+         * be unique
+         * @param parent pointer to the parent lvgl object for this component.
+         * This should not be null
+         * @param x x-coordinate of the top left corner of the component
+         * @param y y-coordinate of the top right corner of the component
+         */
         Component(std::string name, lv_obj_t *parent, int x, int y);
 
+        /**
+         * Creates a new Component
+         * @param name name of the component to be created. This name should
+         * be unique
+         * @param parent pointer to the parent lvgl object for this component.
+         * This should not be null
+         * @param x x-coordinate of the top left corner of the component
+         * @param y y-coordinate of the top right corner of the component
+         * @param width width of the component
+         * @param height height of the component
+         */
         Component(std::string name, lv_obj_t *parent, int x, int y, int width,
                   int height);
 
-        int getX() const;
+        /**
+         * Getter for x
+         */
+        __attribute__((unused)) int getX() const;
 
-        void setX(int x);
+        /**
+         * Setter for x
+         */
+        __attribute__((unused)) void setX(int x);
 
-        int getY() const;
+        /**
+         * Getter for y
+         */
+        __attribute__((unused)) int getY() const;
 
-        void setY(int y);
+        /**
+         * Setter for y
+         */
+        __attribute__((unused)) void setY(int y);
 
-        int getWidth() const;
+        /**
+         * Getter for width
+         */
+        __attribute__((unused)) int getWidth() const;
 
-        void setWidth(int width);
+        /**
+         * Setter for width
+         */
+        __attribute__((unused)) void setWidth(int width);
 
-        int getHeight() const;
+        /**
+         * Getter for height
+         */
+        __attribute__((unused)) int getHeight() const;
 
-        void setHeight(int height);
+        /**
+         * Setter for height
+         */
+        __attribute__((unused)) void setHeight(int height);
 
+        /**
+         * Getter for name
+         */
         const std::string &getName() const;
 
-        void setName(const std::string &name);
+        /**
+         * Setter for name
+         */
+        __attribute__((unused)) void setName(const std::string &name);
 
-        lv_obj_t *getObj() const;
+        /**
+         * Getter for obj
+         */
+        __attribute__((unused)) lv_obj_t *getObj() const;
 
-        void setObj(lv_obj_t *obj);
+        /**
+         * Setter for obj
+         */
+        __attribute__((unused)) void setObj(lv_obj_t *obj);
 
-        lv_obj_t *getParent() const;
+        /**
+         * Getter for parent
+         */
+        __attribute__((unused)) lv_obj_t *getParent() const;
 
+        /**
+         * Setter for parent
+         */
         void setParent(lv_obj_t *parent);
     };
 }

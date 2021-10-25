@@ -29,46 +29,6 @@
 
 #include "Component.hpp"
 
-int LouUI::Component::getX() const {
-    return x;
-}
-
-void LouUI::Component::setX(int x) {
-    Component::x = x;
-}
-
-int LouUI::Component::getY() const {
-    return y;
-}
-
-void LouUI::Component::setY(int y) {
-    Component::y = y;
-}
-
-int LouUI::Component::getWidth() const {
-    return width;
-}
-
-void LouUI::Component::setWidth(int width) {
-    Component::width = width;
-}
-
-int LouUI::Component::getHeight() const {
-    return height;
-}
-
-void LouUI::Component::setHeight(int height) {
-    Component::height = height;
-}
-
-const std::string &LouUI::Component::getName() const {
-    return name;
-}
-
-void LouUI::Component::setName(const std::string &name) {
-    Component::name = name;
-}
-
 LouUI::Component::Component(std::string name) : name(std::move(name)) {
     x = 0;
     y = 0;
@@ -78,32 +38,78 @@ LouUI::Component::Component(std::string name) : name(std::move(name)) {
     parent = nullptr;
 }
 
-lv_obj_t *LouUI::Component::getObj() const {
-    return obj;
-}
-
-void LouUI::Component::setObj(lv_obj_t *obj) {
-    Component::obj = obj;
-}
-
 LouUI::Component::Component(std::string name, lv_obj_t *parent) :
-                            name(std::move(name)), parent(parent) {
+        name(std::move(name)), parent(parent) {
+    x = 0;
+    y = 0;
+    width = 0;
+    height = 0;
     obj = nullptr;
 }
 
 LouUI::Component::Component(std::string name, lv_obj_t *parent, int x, int y) :
-                            name(std::move(name)), parent(parent), x(x), y(y){
+        name(std::move(name)), parent(parent), x(x), y(y) {
+    width = 0;
+    height = 0;
     obj = nullptr;
 }
 
 LouUI::Component::Component(std::string name, lv_obj_t *parent, int x,
                             int y, int width, int height) :
-                            name(std::move(name)), parent(parent), x(x), y(x),
-                            width(width), height(height){
+        name(std::move(name)), parent(parent), x(x), y(x),
+        width(width), height(height) {
     obj = nullptr;
 }
 
-lv_obj_t *LouUI::Component::getParent() const {
+__attribute__((unused)) int LouUI::Component::getX() const {
+    return x;
+}
+
+__attribute__((unused)) void LouUI::Component::setX(int x) {
+    Component::x = x;
+}
+
+__attribute__((unused)) int LouUI::Component::getY() const {
+    return y;
+}
+
+__attribute__((unused)) void LouUI::Component::setY(int y) {
+    Component::y = y;
+}
+
+__attribute__((unused)) int LouUI::Component::getWidth() const {
+    return width;
+}
+
+__attribute__((unused)) void LouUI::Component::setWidth(int width) {
+    Component::width = width;
+}
+
+__attribute__((unused)) int LouUI::Component::getHeight() const {
+    return height;
+}
+
+__attribute__((unused)) void LouUI::Component::setHeight(int height) {
+    Component::height = height;
+}
+
+const std::string &LouUI::Component::getName() const {
+    return name;
+}
+
+__attribute__((unused)) void LouUI::Component::setName(const std::string &name) {
+    Component::name = name;
+}
+
+__attribute__((unused)) lv_obj_t *LouUI::Component::getObj() const {
+    return obj;
+}
+
+__attribute__((unused)) void LouUI::Component::setObj(lv_obj_t *obj) {
+    Component::obj = obj;
+}
+
+__attribute__((unused)) lv_obj_t *LouUI::Component::getParent() const {
     return parent;
 }
 

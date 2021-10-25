@@ -32,7 +32,7 @@
 
 LouUI::Display::Display() {
     //sets the UI theme
-    lv_theme_t* theme = lv_theme_alien_init(200, NULL);
+    lv_theme_t *theme = lv_theme_alien_init(200, NULL);
     lv_theme_set_current(theme);
 
     //initialize the tabview
@@ -48,13 +48,13 @@ void LouUI::Display::setTabView(lv_obj_t *tabView) {
 }
 
 void LouUI::Display::addScreen(std::string name) {
-    auto* newScreen = new Screen(lv_tabview_add_tab(tabView, name.c_str()));
+    auto *newScreen = new Screen(lv_tabview_add_tab(tabView, name.c_str()));
     newScreen->setName(name);
     screens.push_back(newScreen);
 }
 
-void LouUI::Display::addScreens(const std::vector<std::string>& names) {
-    for(const auto& name : names){
+void LouUI::Display::addScreens(const std::vector<std::string> &names) {
+    for (const auto &name: names) {
         addScreen(name);
     }
 }
@@ -63,9 +63,9 @@ int LouUI::Display::getScreenCount() {
     return screens.size();
 }
 
-LouUI::Screen *LouUI::Display::getScreen(const std::string& name) {
-    for(auto screen : screens){
-        if(screen->getName() == name) return screen;
+LouUI::Screen *LouUI::Display::getScreen(const std::string &name) {
+    for (auto screen: screens) {
+        if (screen->getName() == name) return screen;
     }
     return nullptr;
 }

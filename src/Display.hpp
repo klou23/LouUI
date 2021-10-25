@@ -39,8 +39,8 @@
 namespace LouUI {
     class Display {
     private:
-        lv_obj_t* tabView;
-        std::vector<Screen*> screens;
+        lv_obj_t *tabView;
+        std::vector<Screen *> screens;
     public:
         /**
          * Creates a new display.
@@ -72,7 +72,7 @@ namespace LouUI {
          * @param names vector of the names of the screens to be created.
          * These names should all be unique
          */
-        void addScreens(const std::vector<std::string>& names);
+        void addScreens(const std::vector<std::string> &names);
 
         /**
          * Gets the number of screens
@@ -88,7 +88,7 @@ namespace LouUI {
          * @return a pointer to the screen. Returns null if the screen does
          * not exist
          */
-        Screen* getScreen(const std::string& name);
+        Screen *getScreen(const std::string &name);
     };
 }
 

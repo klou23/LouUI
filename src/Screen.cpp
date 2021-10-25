@@ -29,6 +29,8 @@
 
 #include "Screen.hpp"
 
+#include <utility>
+
 
 LouUI::Screen::Screen(lv_obj_t *page) : page(page) {}
 
@@ -53,14 +55,14 @@ int LouUI::Screen::getComponentCount() {
 }
 
 LouUI::Component *LouUI::Screen::getComponent(std::string name) {
-    for(auto component : components){
-        if(component->getName() == name) return component;
+    for (auto component: components) {
+        if (component->getName() == name) return component;
     }
     return nullptr;
 }
 
 void LouUI::Screen::addComponent(std::string name) {
-    Component* component = new Component(name);
+    auto *component = new Component(std::move(name));
     component->setParent(page);
     components.push_back(component);
 }

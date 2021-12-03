@@ -1,10 +1,10 @@
 /**
- * @file Label.hpp
- * @brief Label class that is used to represent text labels
- * @details Header file for the Label class, which is a type of Component
- * that displays a text string. It is a type of lvgl object.
+ * @file Label.cpp
+ * @brief Label class used to represent text labels
+ * @details Header file for the Label class, which displays a string
+ * of text on the screen
  * @author Kevin Lou
- * @date September 23, 2021
+ * @date November 18, 2021
  *
  * Copyright (c) 2021 Kevin Lou
  *
@@ -31,106 +31,132 @@
 #define LOUUI_LABEL_HPP
 
 #include <string>
-#include <utility>
-
-#include "Component.hpp"
+#include "Color.hpp"
+#include "Align.hpp"
+#include "../include/display/lvgl.h"
+#include "../include/display/lv_objx/lv_label.h"
 
 namespace LouUI {
-    class Label : public Component {
+
+    class Label {
+
+    public:
+        enum LongMode{
+            EXPAND,
+            BREAK,
+            SCROLL,
+            DOT,
+            ROLL,
+            CROP,
+        };
+
+        enum TextAlign{
+            LEFT,
+            CENTER,
+            RIGHT,
+        };
+
     private:
-        std::string text;
+        lv_obj_t *obj;
+        Color c;
+        lv_style_t *style;
+
     public:
 
         /**
-         * Creates a new label
-         * @warning this constructor should generally should not be used as
-         * it does not have a parent object
-         * @param name name of the label to be created. This name should be
-         * unique
+         * Creates a new Label
+         * @param parent The object the label is created in
          */
-        explicit Label(std::string name);
+        explicit Label(lv_obj_t *parent);
 
         /**
-         * Creates a new label
-         * @param name name of the label to be created. This name should be
-         * unique
-         * @param parent pointer to the parent lvgl object for this component.
-         * This should not be null
+         * Creates a new label as a copy of another label
+         * @param parent The object the label is created in
+         * @param l The label from which the copy is made
          */
-        Label(std::string name, lv_obj_t *parent);
+        Label(lv_obj_t *parent, Label l);
 
         /**
-         * Creates a new label
-         * @param name name of the component to be created. This name should
-         * be unique
-         * @param parent pointer to the parent lvgl object for this component.
-         * This should not be null
-         * @param x x-coordinate of the top left corner of the component
-         * @param y y-coordinate of the top right corner of the component
+         * Getter for obj
          */
-        Label(std::string name, lv_obj_t *parent, int x, int y);
+        lv_obj_t *getObj() const;
 
         /**
-         * Creates a new label
-         * @param name name of the component to be created. This name should
-         * be unique
-         * @param parent pointer to the parent lvgl object for this component.
-         * This should not be null
-         * @param x x-coordinate of the top left corner of the component
-         * @param y y-coordinate of the top right corner of the component
-         * @param width width of the component
-         * @param height height of the component
+         * Getter for c
          */
-        Label(std::string name, lv_obj_t *parent, int x, int y, int width,
-              int height);
+        const Color &getC() const;
 
         /**
-         * Creates a new label
-         * @warning this constructor should generally should not be used as
-         * it does not have a parent object
-         * @param name name of the component to be created. This name should
-         * be unique
-         * @param text text to be displayed in the label
+         * Getter for style
          */
-        Label(std::string name, std::string text);
+        lv_style_t *getStyle() const;
 
         /**
-         * Creates a new label
-         * @param name name of the component to be created. This name should
-         * be unique
-         * @param parent pointer to the parent lvgl object for this component.
-         * This should not be null
-         * @param text text to be displayed in the label
+         * Sets the width of the label
          */
-        Label(std::string name, lv_obj_t *parent, std::string text);
+        Label* setWidth(int width);
 
         /**
-         * Creates a new label
-         * @param name name of the component to be created. This name should
-         * be unique
-         * @param parent pointer to the parent lvgl object for this component.
-         * This should not be null
-         * @param x x-coordinate of the top left corner of the component
-         * @param y y-coordinate of the top right corner of the component
-         * @param text text to be displayed in the label
+         * Sets the x position of the label
          */
-        Label(std::string name, lv_obj_t *parent, int x, int y,
-              std::string text);
+        Label* setX(int x);
 
         /**
-         * Creates a new label
-         * @param name name of the component to be created. This name should
-         * be unique
-         * @param parent pointer to the parent lvgl object for this component.
-         * This should not be null
-         * @param x x-coordinate of the top left corner of the component
-         * @param y y-coordinate of the top right corner of the component
-         * @param width width of the component
-         * @param height height of the component
-         * @param text text to be displayed in the label
+         * Sets the y position of the label
          */
-        Label(std::string name, lv_obj_t *parent, int x, int y, int width,
-              int height, std::string text);
+        Label* setY(int y);
+
+        /**
+         * Sets the position of the label
+         */
+        Label* setPosition(int x, int y);
+
+        /**
+         * Aligns the label to another object
+         * @param ref object to align to
+         * @param alignType type of alignment
+         */
+        Label* align(lv_obj_t *ref, Align alignType);
+
+        /**
+         * Aligns the label to another object
+         * @param ref object to align to
+         * @param alignType type of alignment
+         * @param xShift pixels to shift in the x-direction
+         * @param yShift pixels to shift in the y-direction
+         */
+        Label* align(lv_obj_t *ref, Align alignType, int xShift,
+                     int yShift);
+
+        /**
+         * Sets the text of the label
+         */
+        Label* setText(std::string text);
+
+        /**
+         * Sets the long mode of the label, which determines behavior when
+         * the text in the label is too long
+         */
+        Label* setLongMode(LongMode m);
+
+        /**
+         * Sets the text alignment within the label
+         */
+        Label* setTextAlign(TextAlign a);
+
+        /**
+         * Sets the font of the label
+         * @param size font size. This can be: 10, 20, 30, or 40
+         * @param mono whether or not the font is mono
+         */
+        Label* setFont(int size, bool mono = false);
+
+        /**
+         * Sets the opacity of the label
+         * @param opacity label opacity. This should be between 0 and 225
+         */
+        Label* setOpacity(int opacity);
+
     };
 }
 

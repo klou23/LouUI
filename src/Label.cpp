@@ -1,10 +1,10 @@
 /**
  * @file Label.cpp
- * @brief Label class that is used to represent text labels
- * @details Implementation file for the Label class, which is a type of
- * Component that displays a text string. It is a type of lvgl object
+ * @brief Label class used to represent text labels
+ * @details Implementation file for the Label class, which displays a string
+ * of text on the screen
  * @author Kevin Lou
- * @date September 23, 2021
+ * @date November 18, 2021
  *
  * Copyright (c) 2021 Kevin Lou
  *
@@ -28,49 +28,110 @@
  */
 
 #include "Label.hpp"
+#include <string>
+#include "Color.hpp"
+#include "../include/display/lvgl.h"
+#include "../include/display/lv_objx/lv_label.h"
 
-#include <utility>
+LouUI::Label::Label(lv_obj_t *parent) : c("WHITE"){
+    obj = lv_label_create(parent, nullptr);
+    lv_label_set_recolor(obj, true);
 
+    style = (lv_style_t *)(malloc(sizeof(lv_style_t)));
+    lv_style_copy(style, &lv_style_plain_color);
 
-LouUI::Label::Label(std::string name) : Component(std::move(name)) {
-
-}
-
-LouUI::Label::Label(std::string name, lv_obj_t *parent) : Component(
-        std::move(name), parent) {
-
-}
-
-LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y)
-        : Component(std::move(name), parent, x, y) {
+    lv_label_set_style(obj, style);
 
 }
 
-LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y, int width,
-                    int height) : Component(std::move(name), parent, x, y,
-                                            width, height) {
-
+LouUI::Label::Label(lv_obj_t *parent, LouUI::Label l) : c("Black"){
+    obj = lv_label_create(parent, l.getObj());
+    style = lv_label_get_style(obj);
 }
 
-LouUI::Label::Label(std::string name, std::string text) : Component(
-        std::move(name)), text(std::move(text)) {
-
+lv_obj_t *LouUI::Label::getObj() const {
+    return obj;
 }
 
-LouUI::Label::Label(std::string name, lv_obj_t *parent, std::string text) :
-        Component(std::move(name), parent), text(std::move(text)) {
-
+const LouUI::Color &LouUI::Label::getC() const {
+    return c;
 }
 
-LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y,
-                    std::string text) : Component(std::move(name), parent, x,
-                                                  y), text(std::move(text)) {
-
+lv_style_t *LouUI::Label::getStyle() const {
+    return style;
 }
 
-LouUI::Label::Label(std::string name, lv_obj_t *parent, int x, int y, int width,
-                    int height, std::string text) :
-        Component(std::move(name), parent, x, y, width, height),
-        text(std::move(text)) {
-
+LouUI::Label *LouUI::Label::setWidth(int width) {
+    lv_obj_set_width(obj, width);
+    return this;
 }
+
+LouUI::Label *LouUI::Label::setX(int x) {
+    lv_obj_set_x(obj, x);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setY(int y) {
+    lv_obj_set_y(obj, y);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setPosition(int x, int y) {
+    lv_obj_set_pos(obj, x, y);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::align(lv_obj_t *ref, Align alignType) {
+    lv_obj_align(obj, ref, alignType, 0, 0);
+    return this;
+}
+
+LouUI::Label *
+LouUI::Label::align(lv_obj_t *ref, Align alignType, int xShift, int
+yShift) {
+    lv_obj_align(obj, ref, alignType, xShift, yShift);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setText(std::string text) {
+    text = c.hexString() + " " + text;
+    lv_label_set_text(obj, text.c_str());
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setLongMode(LongMode m) {
+    lv_label_set_long_mode(obj, m);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setTextAlign(TextAlign a) {
+    lv_label_set_align(obj, a);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setFont(int size, bool mono) {
+    lv_font_t *f;
+    if(mono){
+        if(size == 10) f = &pros_font_dejavu_mono_10;
+        else if(size == 20) f = &pros_font_dejavu_mono_20;
+        else if(size == 30) f = &pros_font_dejavu_mono_30;
+        else if(size == 40) f = &pros_font_dejavu_mono_40;
+    }else{
+        if(size == 10) f = &lv_font_dejavu_10;
+        else if(size == 20) f = &lv_font_dejavu_20;
+        else if(size == 30) f = &lv_font_dejavu_30;
+        else if(size == 40) f = &lv_font_dejavu_40;
+    }
+
+    style->text.font = f;
+    lv_obj_refresh_style(obj);
+    return this;
+}
+
+LouUI::Label *LouUI::Label::setOpacity(int opacity) {
+    if(0 <= opacity && opacity <= 255) style->text.opa = opacity;
+    lv_obj_refresh_style(obj);
+    return this;
+}
+
+

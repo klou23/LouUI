@@ -48,9 +48,9 @@ void LouUI::Display::setTabView(lv_obj_t *tabView) {
 }
 
 void LouUI::Display::addScreen(std::string name) {
-    auto *newScreen = new Screen(lv_tabview_add_tab(tabView, name.c_str()));
-    newScreen->setName(name);
-    screens.push_back(newScreen);
+    if(screens.count(name)) return;
+    auto *newScreen = lv_tabview_add_tab(tabView, name.c_str());
+    screens[name] = newScreen;
 }
 
 void LouUI::Display::addScreens(const std::vector<std::string> &names) {
@@ -63,10 +63,8 @@ int LouUI::Display::getScreenCount() {
     return screens.size();
 }
 
-LouUI::Screen *LouUI::Display::getScreen(const std::string &name) {
-    for (auto screen: screens) {
-        if (screen->getName() == name) return screen;
-    }
+lv_obj_t *LouUI::Display::getScreen(const std::string &name) {
+    if(screens.count(name)) return screens[name];
     return nullptr;
 }
 

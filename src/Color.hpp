@@ -1,10 +1,10 @@
 /**
- * @file Screen.cpp
- * @brief Screen class that works like a tab in the display
- * @details Implementation file for the screen class, that will contain all of
- * the UI contents. It acts like a lvgl page.
+ * @file Color.hpp
+ * @brief Color class used to represent colors
+ * @details Header file for the Color class, which is used to
+ * represent an RGB color
  * @author Kevin Lou
- * @date September 3, 2021
+ * @date October 25, 2021
  *
  * Copyright (c) 2021 Kevin Lou
  *
@@ -27,42 +27,43 @@
  * SOFTWARE.
  */
 
-#include "Screen.hpp"
+#ifndef LOUUI_COLOR_HPP
+#define LOUUI_COLOR_HPP
 
-#include <utility>
+#include <string>
+#include "../include/display/lvgl.h"
 
+namespace LouUI {
+    class Color {
+    private:
 
-LouUI::Screen::Screen(lv_obj_t *page) : page(page) {}
+        int r;
+        int g;
+        int b;
 
-lv_obj_t *LouUI::Screen::getPage() const {
-    return page;
+    public:
+
+        Color(std::string color);
+
+        Color(int r, int g, int b);
+
+        int getR() const;
+
+        void setR(int r);
+
+        int getG() const;
+
+        void setG(int g);
+
+        int getB() const;
+
+        void setB(int b);
+
+        std::string hexString() const;
+
+        lv_color_t toLvColor();
+    };
 }
 
-void LouUI::Screen::setPage(lv_obj_t *page) {
-    Screen::page = page;
-}
 
-const std::string &LouUI::Screen::getName() const {
-    return name;
-}
-
-void LouUI::Screen::setName(const std::string &name) {
-    Screen::name = name;
-}
-
-int LouUI::Screen::getComponentCount() {
-    return components.size();
-}
-
-LouUI::Component *LouUI::Screen::getComponent(std::string name) {
-    for (auto component: components) {
-        if (component->getName() == name) return component;
-    }
-    return nullptr;
-}
-
-void LouUI::Screen::addComponent(std::string name) {
-    auto *component = new Component(std::move(name));
-    component->setParent(page);
-    components.push_back(component);
-}
+#endif //LOUUI_COLOR_HPP

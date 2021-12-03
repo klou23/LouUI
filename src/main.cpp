@@ -27,22 +27,11 @@
  */
 
 #include "main.h"
+#include "UIVars.hpp"
+#include "Button.hpp"
 
-/**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
-}
+LouUI::Display display;
+LouUI::Button* b = nullptr;
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -51,10 +40,36 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+    display.addScreen("Screen1");
+    display.addScreen("Screen2");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+    static LouUI::Label l(display.getScreen("Screen1"));
+    l.setText("Label");
+
+//    static lv_obj_t* l = nullptr;
+//    l = lv_label_create(display.getScreen("Screen1"), nullptr);
+//    static lv_style_t* style = (lv_style_t *)(malloc(sizeof(lv_style_t)));
+//    lv_style_copy(style, &lv_style_plain_color);
+//    lv_label_set_style(l, style);
+//    lv_label_set_text(l, "hello world");
+
+    b = (new LouUI::Button(display.getScreen("Screen1")))
+            ->setMainColor(LouUI::Color("BLUE"), LouUI::Button::ALL)
+            ->setGradientColor(LouUI::Color("BLUE"), LouUI::Button::ALL)
+            ->setMainColor(LouUI::Color("RED"), LouUI::Button::PRESSED)
+            ->setGradientColor(LouUI::Color("RED"), LouUI::Button::PRESSED)
+            ->setPosition(200, 50);
+
+    static LouUI::Label* bl = (new LouUI::Label(b->getObj()))
+            ->setText("Button");
+
+//    label1 = (new LouUI::Label(display.getScreen("Screen1")))
+//            ->setText("Label1")->setPosition(20, 20);
+
+//    static lv_obj_t* label = lv_label_create(display.getScreen("Screen1"),
+//                                             nullptr);
+//    lv_label_set_text(label, "Label2");
+
 }
 
 /**
@@ -102,19 +117,5 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
 
-	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
-
-		left_mtr = left;
-		right_mtr = right;
-		pros::delay(20);
-	}
 }

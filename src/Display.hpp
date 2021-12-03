@@ -31,16 +31,17 @@
 #define LOUUI_DISPLAY_HPP
 
 #include <vector>
+#include <unordered_map>
+#include <string>
 
-#include "../include/display/lv_core/lv_obj.h"
-#include "Screen.hpp"
-
+#include "../include/display/lvgl.h"
+#include "Color.hpp"
 
 namespace LouUI {
     class Display {
     private:
         lv_obj_t *tabView;
-        std::vector<Screen *> screens;
+        std::unordered_map<std::string, lv_obj_t*> screens;
     public:
         /**
          * Creates a new display.
@@ -62,7 +63,8 @@ namespace LouUI {
          * Creates a new empty screen and adds it to the display
          *
          * @param name name of the screen to be created. This name should be
-         * unique
+         * unique. If the name has already been used, this method will not
+         * add a new screen.
          */
         void addScreen(std::string name);
 
@@ -70,7 +72,8 @@ namespace LouUI {
          * Creates new empty screens and adds them to the display
          *
          * @param names vector of the names of the screens to be created.
-         * These names should all be unique
+         * These names should all be unique. If a name has already been used,
+         * this method will not add a new screen.
          */
         void addScreens(const std::vector<std::string> &names);
 
@@ -88,7 +91,7 @@ namespace LouUI {
          * @return a pointer to the screen. Returns null if the screen does
          * not exist
          */
-        Screen *getScreen(const std::string &name);
+        lv_obj_t *getScreen(const std::string &name);
     };
 }
 

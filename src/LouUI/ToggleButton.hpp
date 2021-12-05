@@ -1,10 +1,11 @@
 /**
- * @file Button.hpp
- * @brief Button class for non-toggleable buttons
- * @details Header file for the Button class, which displays a
- * non-toggleable button on the screen and will execute an action when pressed
+ * @file ToggleButton.hpp
+ * @brief ToggleButton class for toggleable buttons
+ * @details Header file for the ToggleButton class, which displays a
+ * toggleable button on the screen and can return whether or not the button
+ * is currently toggled.
  * @author Kevin Lou
- * @date November 25, 2021
+ * @date November 26, 2021
  *
  * Copyright (c) 2021 Kevin Lou
  *
@@ -27,15 +28,17 @@
  * SOFTWARE.
  */
 
-#ifndef LOUUI_BUTTON_HPP
-#define LOUUI_BUTTON_HPP
+#ifndef LOUUI_TOGGLEBUTTON_HPP
+#define LOUUI_TOGGLEBUTTON_HPP
 
-#include "../include/display/lvgl.h"
+#include "../../include/display/lvgl.h"
+#include "../../include/display/lv_core/lv_obj.h"
 #include "Color.hpp"
 #include "Align.hpp"
+#include <vector>
 
 namespace LouUI {
-    class Button {
+    class ToggleButton {
     public:
 
         using Action = lv_action_t;
@@ -43,7 +46,13 @@ namespace LouUI {
         enum State{
             RELEASED,
             PRESSED,
+            TOGGLED_RELEASED,
+            TOGGLED_PRESSED,
             INACTIVE,
+            ALL_RELEASED,
+            ALL_PRESSED,
+            ALL_UNTOGGLED,
+            ALL_TOGGLED,
             ALL
         };
 
@@ -51,6 +60,8 @@ namespace LouUI {
         lv_obj_t *obj;
         lv_style_t *releasedStyle;
         lv_style_t *pressedStyle;
+        lv_style_t *toggledReleasedStyle;
+        lv_style_t *toggledPressedStyle;
         lv_style_t *inactiveStyle;
 
         lv_btn_state_t convertState(State s);
@@ -61,14 +72,14 @@ namespace LouUI {
          * Creates a new button
          * @param parent The object the button is created in
          */
-        explicit Button(lv_obj_t *parent);
+        explicit ToggleButton(lv_obj_t *parent);
 
         /**
          * Creates a new button as a copy of another button
          * @param parent The object the button is created in
          * @param b The button from which the copy is made
          */
-        Button(lv_obj_t *parent, Button b);
+        ToggleButton(lv_obj_t *parent, ToggleButton b);
 
         /**
          * Getter for obj
@@ -86,61 +97,25 @@ namespace LouUI {
         lv_style_t *getPressedStyle() const;
 
         /**
+         * Getter for toggledReleasedStyle
+         */
+        lv_style_t *getToggledReleasedStyle() const;
+
+        /**
+         * Getter for toggledPressedStyle
+         */
+        lv_style_t *getToggledPressedStyle() const;
+
+        /**
          * Getter for inactiveStyle
          */
         lv_style_t *getInactiveStyle() const;
 
         /**
-         * Sets the width of the button
+         * Gets whether or not the button is toggled
+         * @return true if toggled, false if otherwise
          */
-        Button* setWidth(int width);
-
-        /**
-         * Sets the height of the button
-         */
-        Button* setHeight(int height);
-
-        /**
-         * Sets the size of the button
-         */
-        Button* setSize(int width, int height);
-
-        /**
-         * Sets the x position of the button
-         */
-        Button* setX(int x);
-
-        /**
-         * Sets the y position of the button
-         */
-        Button* setY(int y);
-
-        /**
-         * Sets the position of the button
-         */
-        Button* setPosition(int x, int y);
-
-        /**
-         * Aligns the button to another object
-         * @param ref object to align to
-         * @param alignType type of alignment
-         */
-        Button* align(lv_obj_t *ref, Align alignType);
-
-        /**
-         * Aligns the button to another object
-         * @param ref object to align to
-         * @param alignType type of alignment
-         * @param xShift pixels to shift in the x-direction
-         * @param yShift pixels to shift in the y-direction
-         */
-        Button* align(lv_obj_t *ref, Align alignType, int xShift,
-                      int yShift);
-
-        /**
-         * Manually set the state of the button
-         */
-        Button* setState(State s);
+        bool isToggled();
 
         /**
          * Sets an action to execute when the button is clicked
@@ -150,98 +125,150 @@ namespace LouUI {
          * - Single parameter: lv_obj_t *
          * - Returns LV_RES_OK
          */
-        Button* setAction(Action a);
+        ToggleButton* setAction(Action a);
+
+        /**
+         * Sets the width of the button
+         */
+        ToggleButton* setWidth(int width);
+
+        /**
+         * Sets the height of the button
+         */
+        ToggleButton* setHeight(int height);
+
+        /**
+         * Sets the size of the button
+         */
+        ToggleButton* setSize(int width, int height);
+
+        /**
+         * Sets the x position of the button
+         */
+        ToggleButton* setX(int x);
+
+        /**
+         * Sets the y position of the button
+         */
+        ToggleButton* setY(int y);
+
+        /**
+         * Sets the position of the button
+         */
+        ToggleButton* setPosition(int x, int y);
+
+        /**
+         * Aligns the button to another object
+         * @param ref object to align to
+         * @param alignType type of alignment
+         */
+        ToggleButton* align(lv_obj_t *ref, Align alignType);
+
+        /**
+         * Aligns the button to another object
+         * @param ref object to align to
+         * @param alignType type of alignment
+         * @param xShift pixels to shift in the x-direction
+         * @param yShift pixels to shift in the y-direction
+         */
+        ToggleButton* align(lv_obj_t *ref, Align alignType, int xShift,
+                      int yShift);
+
+        /**
+         * Manually set the state of the button
+         */
+        ToggleButton* setState(State s);
 
         /**
          * Sets the main color of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setMainColor(LouUI::Color c, State s);
+        ToggleButton* setMainColor(LouUI::Color c, State s);
 
         /**
          * Sets the gradient(secondary) color of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setGradientColor(LouUI::Color c, State s);
+        ToggleButton* setGradientColor(LouUI::Color c, State s);
 
         /**
          * Sets the radius of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setRadius(int r, State s);
+        ToggleButton* setRadius(int r, State s);
 
         /**
          * Sets the opacity of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setOpacity(int o, State s);
+        ToggleButton* setOpacity(int o, State s);
 
         /**
          * Sets the border color of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setBorderColor(LouUI::Color c, State s);
+        ToggleButton* setBorderColor(LouUI::Color c, State s);
 
         /**
          * Sets the border weight of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setBorderWidth(int w, State s);
+        ToggleButton* setBorderWidth(int w, State s);
 
         /**
          * Sets the border opacity of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setBorderOpacity(int o, State s);
+        ToggleButton* setBorderOpacity(int o, State s);
 
         /**
          * Sets the shadow color of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setShadowColor(LouUI::Color c, State s);
+        ToggleButton* setShadowColor(LouUI::Color c, State s);
 
         /**
          * Sets the shadow width of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setShadowWidth(int w, State s);
+        ToggleButton* setShadowWidth(int w, State s);
 
         /**
          * Sets the inner padding of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setInnerPadding(int i, State s);
+        ToggleButton* setInnerPadding(int i, State s);
 
         /**
          * Sets the horizontal padding of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setHorizontalPadding(int h, State s);
+        ToggleButton* setHorizontalPadding(int h, State s);
 
         /**
          * Sets the vertical padding of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setVerticalPadding(int v, State s);
+        ToggleButton* setVerticalPadding(int v, State s);
 
         /**
          * Sets the outside(horizontal and vertical) padding of the button
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setOutsidePadding(int h, int v, State s);
+        ToggleButton* setOutsidePadding(int h, int v, State s);
 
         /**
          * Sets all the padding properties (horizontal, vertical, and inner)
@@ -249,10 +276,10 @@ namespace LouUI {
          * @param s The button state to be modified. Use ALL to set for all
          * states.
          */
-        Button* setPadding(int h, int v, int i, State s);
+        ToggleButton* setPadding(int h, int v, int i, State s);
 
     };
 }
 
 
-#endif //LOUUI_BUTTON_HPP
+#endif //LOUUI_TOGGLEBUTTON_HPP

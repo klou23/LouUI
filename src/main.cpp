@@ -28,10 +28,17 @@
 
 #include "main.h"
 #include "UIVars.hpp"
-#include "Button.hpp"
+#include "LouUI/Button.hpp"
+#include "Autonomous.hpp"
+#include "UIFuncs.hpp"
 
 LouUI::Display display;
-LouUI::Button* b = nullptr;
+LouUI::ToggleButton* redButton = nullptr;
+LouUI::ToggleButton* blueButton = nullptr;
+LouUI::Label* redButtonLabel = nullptr;
+LouUI::Label* blueButtonLabel = nullptr;
+LouUI::DropDownMenu* autonSelectMenu = nullptr;
+LouUI::Label* autonDescription = nullptr;
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -40,36 +47,52 @@ LouUI::Button* b = nullptr;
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-    display.addScreen("Screen1");
-    display.addScreen("Screen2");
 
-    static LouUI::Label l(display.getScreen("Screen1"));
-    l.setText("Label");
+    display.addScreen("Auton Selector");
 
-//    static lv_obj_t* l = nullptr;
-//    l = lv_label_create(display.getScreen("Screen1"), nullptr);
-//    static lv_style_t* style = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-//    lv_style_copy(style, &lv_style_plain_color);
-//    lv_label_set_style(l, style);
-//    lv_label_set_text(l, "hello world");
+    redButton = (new LouUI::ToggleButton(display.getScreen("Auton Selector")))
+            ->setPosition(10, 0)
+            ->setSize(100, 50)
+            ->setMainColor(LouUI::Color("RED"), LouUI::ToggleButton::ALL)
+            ->setGradientColor(LouUI::Color("RED"), LouUI::ToggleButton::ALL)
+            ->setBorderColor(LouUI::Color("WHITE"), LouUI::ToggleButton::ALL)
+            ->setBorderOpacity(255, LouUI::ToggleButton::ALL)
+            ->setBorderWidth(0, LouUI::ToggleButton::ALL_UNTOGGLED)
+            ->setBorderWidth(5, LouUI::ToggleButton::ALL_TOGGLED)
+            ->setAction(selectRed);
+    redButtonLabel = (new LouUI::Label(redButton->getObj()))
+            ->setText("RED")
+            ->setFont(30);
 
-    b = (new LouUI::Button(display.getScreen("Screen1")))
-            ->setMainColor(LouUI::Color("BLUE"), LouUI::Button::ALL)
-            ->setGradientColor(LouUI::Color("BLUE"), LouUI::Button::ALL)
-            ->setMainColor(LouUI::Color("RED"), LouUI::Button::PRESSED)
-            ->setGradientColor(LouUI::Color("RED"), LouUI::Button::PRESSED)
-            ->setPosition(200, 50);
+    blueButton = (new LouUI::ToggleButton(display.getScreen("Auton Selector")))
+            ->setSize(100, 50)
+            ->align(redButton->getObj(), LouUI::OUT_RIGHT_MID, 15, 0)
+            ->setMainColor(LouUI::Color("BLUE"), LouUI::ToggleButton::ALL)
+            ->setGradientColor(LouUI::Color("BLUE"), LouUI::ToggleButton::ALL)
+            ->setBorderColor(LouUI::Color("WHITE"), LouUI::ToggleButton::ALL)
+            ->setBorderOpacity(255, LouUI::ToggleButton::ALL)
+            ->setBorderWidth(0, LouUI::ToggleButton::ALL_UNTOGGLED)
+            ->setBorderWidth(5, LouUI::ToggleButton::ALL_TOGGLED)
+            ->setAction(selectBlue);
+    blueButtonLabel = (new LouUI::Label(blueButton->getObj()))
+            ->setText("BLUE");
 
-    static LouUI::Label* bl = (new LouUI::Label(b->getObj()))
-            ->setText("Button");
+    autonDescription = (new LouUI::Label(display.getScreen("Auton Selector")))
+            ->setTextAlign(LouUI::Label::LEFT)
+            ->setLongMode(LouUI::Label::BREAK)
+            ->setWidth(440)
+            ->align(display.getScreen("Auton Selector"), LouUI::CENTER, 0, 20)
+            ->setText(noAutonDescription);
 
-//    label1 = (new LouUI::Label(display.getScreen("Screen1")))
-//            ->setText("Label1")->setPosition(20, 20);
-
-//    static lv_obj_t* label = lv_label_create(display.getScreen("Screen1"),
-//                                             nullptr);
-//    lv_label_set_text(label, "Label2");
-
+    autonSelectMenu = (new LouUI::DropDownMenu(display.getScreen("Auton Selector")))
+            ->setOptions(std::vector<std::string>({
+                                                          "        ---      ",
+                                                          "Auton1",
+                                                          "Auton2",
+                                                          "Prog"
+                                                  }))
+            ->align(blueButton->getObj(), LouUI::OUT_RIGHT_MID, 15, 0)
+            ->setAction(selectAuton);
 }
 
 /**
@@ -89,19 +112,6 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {}
-
-/**
- * Runs the user autonomous code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the autonomous
- * mode. Alternatively, this function may be called in initialize or opcontrol
- * for non-competition testing purposes.
- *
- * If the robot is disabled or communications is lost, the autonomous task
- * will be stopped. Re-enabling the robot will restart the task, not re-start it
- * from where it left off.
- */
-void autonomous() {}
 
 /**
  * Runs the operator control code. This function will be started in its own task

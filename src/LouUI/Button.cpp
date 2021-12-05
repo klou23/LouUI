@@ -28,7 +28,7 @@
  */
 
 #include "Button.hpp"
-#include "../include/display/lv_objx/lv_btn.h"
+#include "../../include/display/lv_objx/lv_btn.h"
 
 lv_btn_state_t LouUI::Button::convertState(LouUI::Button::State s) {
     if(s == RELEASED) return LV_BTN_STATE_REL;
@@ -41,11 +41,11 @@ LouUI::Button::Button(lv_obj_t *parent) {
     obj = lv_btn_create(parent, nullptr);
 
     releasedStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(releasedStyle, &lv_style_plain);
+    lv_style_copy(releasedStyle, &lv_style_btn_rel);
     pressedStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(pressedStyle, &lv_style_plain);
+    lv_style_copy(pressedStyle, &lv_style_btn_pr);
     inactiveStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(inactiveStyle, &lv_style_plain);
+    lv_style_copy(inactiveStyle, &lv_style_btn_ina);
 
     lv_btn_set_style(obj, LV_BTN_STYLE_REL, releasedStyle);
     lv_btn_set_style(obj, LV_BTN_STYLE_PR, pressedStyle);

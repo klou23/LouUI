@@ -29,7 +29,7 @@
  */
 
 #include "ToggleButton.hpp"
-#include "../include/display/lv_objx/lv_btn.h"
+#include "../../include/display/lv_objx/lv_btn.h"
 #include <vector>
 
 lv_btn_state_t LouUI::ToggleButton::convertState(LouUI::ToggleButton::State s) {
@@ -46,15 +46,15 @@ LouUI::ToggleButton::ToggleButton(lv_obj_t *parent) {
     lv_btn_set_toggle(obj, true);
 
     releasedStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(releasedStyle, &lv_style_plain);
+    lv_style_copy(releasedStyle, &lv_style_btn_rel);
     pressedStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(pressedStyle, &lv_style_plain);
+    lv_style_copy(pressedStyle, &lv_style_btn_pr);
     toggledReleasedStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(toggledReleasedStyle, &lv_style_plain);
+    lv_style_copy(toggledReleasedStyle, &lv_style_btn_tgl_rel);
     toggledPressedStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(toggledPressedStyle, &lv_style_plain);
+    lv_style_copy(toggledPressedStyle, &lv_style_btn_tgl_pr);
     inactiveStyle = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(inactiveStyle, &lv_style_plain);
+    lv_style_copy(inactiveStyle, &lv_style_btn_ina);
 
     lv_btn_set_style(obj, LV_BTN_STYLE_REL, releasedStyle);
     lv_btn_set_style(obj, LV_BTN_STYLE_PR, pressedStyle);
@@ -720,6 +720,12 @@ LouUI::ToggleButton::setPadding(int h, int v, int i,
     setHorizontalPadding(h, s);
     setVerticalPadding(v, s);
     setInnerPadding(i, s);
+    return this;
+}
+
+LouUI::ToggleButton *
+LouUI::ToggleButton::setAction(LouUI::ToggleButton::Action a) {
+    lv_btn_set_action(obj, LV_BTN_ACTION_CLICK, a);
     return this;
 }
 

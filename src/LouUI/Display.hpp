@@ -34,7 +34,7 @@
 #include <unordered_map>
 #include <string>
 
-#include "../include/display/lvgl.h"
+#include "../../include/display/lvgl.h"
 #include "Color.hpp"
 
 namespace LouUI {
@@ -92,6 +92,8 @@ namespace LouUI {
          * not exist
          */
         lv_obj_t *getScreen(const std::string &name);
+
+        void initFonts();
     };
 }
 

@@ -30,15 +30,15 @@
 #include "Label.hpp"
 #include <string>
 #include "Color.hpp"
-#include "../include/display/lvgl.h"
-#include "../include/display/lv_objx/lv_label.h"
+#include "../../include/display/lvgl.h"
+#include "../../include/display/lv_objx/lv_label.h"
 
 LouUI::Label::Label(lv_obj_t *parent) : c("WHITE"){
     obj = lv_label_create(parent, nullptr);
     lv_label_set_recolor(obj, true);
 
     style = (lv_style_t *)(malloc(sizeof(lv_style_t)));
-    lv_style_copy(style, &lv_style_plain_color);
+    lv_style_copy(style, &lv_style_pretty_color);
 
     lv_label_set_style(obj, style);
 
@@ -111,17 +111,24 @@ LouUI::Label *LouUI::Label::setTextAlign(TextAlign a) {
 
 LouUI::Label *LouUI::Label::setFont(int size, bool mono) {
     lv_font_t *f;
-    if(mono){
-        if(size == 10) f = &pros_font_dejavu_mono_10;
-        else if(size == 20) f = &pros_font_dejavu_mono_20;
-        else if(size == 30) f = &pros_font_dejavu_mono_30;
-        else if(size == 40) f = &pros_font_dejavu_mono_40;
-    }else{
-        if(size == 10) f = &lv_font_dejavu_10;
-        else if(size == 20) f = &lv_font_dejavu_20;
-        else if(size == 30) f = &lv_font_dejavu_30;
-        else if(size == 40) f = &lv_font_dejavu_40;
-    }
+//    if(mono){
+//        if(size == 10) f = &pros_font_dejavu_mono_10;
+//        else if(size == 20) f = &pros_font_dejavu_mono_20;
+//        else if(size == 30) f = &pros_font_dejavu_mono_30;
+//        else if(size == 40) f = &pros_font_dejavu_mono_40;
+//    }else{
+//        if(size == 10) f = &lv_font_dejavu_10;
+//        else if(size == 20) f = &lv_font_dejavu_20;
+//        else if(size == 30) f = &lv_font_dejavu_30;
+//        else if(size == 40) f = &lv_font_dejavu_40;
+//    }
+
+//    if(size == 10) f = &lv_font_dejavu_10;
+//    else if(size == 20) f = &lv_font_dejavu_20;
+//    else if(size == 30) f = &lv_font_dejavu_30;
+//    else if(size == 40) f = &lv_font_dejavu_40;
+
+    f = &dejavu_20;
 
     style->text.font = f;
     lv_obj_refresh_style(obj);

@@ -1,11 +1,21 @@
 #ifndef LOUUI_UIVARS_HPP
 #define LOUUI_UIVARS_HPP
 
-#include "Display.hpp"
-#include "Label.hpp"
-#include "Button.hpp"
+#include "LouUI/Display.hpp"
+#include "LouUI/Label.hpp"
+#include "LouUI/Button.hpp"
+#include "LouUI/ToggleButton.hpp"
+#include "LouUI/DropDownMenu.hpp"
 
+/**
+ * UI objects
+ */
 extern LouUI::Display display;
-extern LouUI::Button* b;
+extern LouUI::ToggleButton* redButton;
+extern LouUI::Label* redButtonLabel;
+extern LouUI::ToggleButton* blueButton;
+extern LouUI::Label* blueButtonLabel;
+extern LouUI::DropDownMenu* autonSelectMenu;
+extern LouUI::Label* autonDescription;
 
 #endif //LOUUI_UIVARS_HPP

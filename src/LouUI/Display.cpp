@@ -28,12 +28,15 @@
  */
 
 #include "Display.hpp"
+#include "Fonts.hpp"
 
 
 LouUI::Display::Display() {
     //sets the UI theme
     lv_theme_t *theme = lv_theme_alien_init(200, NULL);
     lv_theme_set_current(theme);
+
+    initFonts();
 
     //initialize the tabview
     tabView = lv_tabview_create(lv_scr_act(), NULL);
@@ -66,5 +69,26 @@ int LouUI::Display::getScreenCount() {
 lv_obj_t *LouUI::Display::getScreen(const std::string &name) {
     if(screens.count(name)) return screens[name];
     return nullptr;
+}
+
+void LouUI::Display::initFonts() {
+    //add symbols
+//    lv_font_add(&symbols_20, &dejavu_20);
+//    lv_font_add(&dejavu_20, &symbols_20);
+
+    //sets the default fonts
+    lv_style_scr.text.font = &dejavu_20;
+    lv_style_transp.text.font = &dejavu_20;
+    lv_style_transp_tight.text.font = &dejavu_20;
+    lv_style_transp_fit.text.font = &dejavu_20;
+    lv_style_plain.text.font = &dejavu_20;
+    lv_style_plain_color.text.font = &dejavu_20;
+    lv_style_pretty.text.font = &dejavu_20;
+    lv_style_pretty_color.text.font = &dejavu_20;
+    lv_style_btn_rel.text.font = &dejavu_20;
+    lv_style_btn_pr.text.font = &dejavu_20;
+    lv_style_btn_tgl_rel.text.font = &dejavu_20;
+    lv_style_btn_tgl_pr.text.font = &dejavu_20;
+    lv_style_btn_ina.text.font = &dejavu_20;
 }
 

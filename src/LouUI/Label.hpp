@@ -33,8 +33,9 @@
 #include <string>
 #include "Color.hpp"
 #include "Align.hpp"
-#include "../include/display/lvgl.h"
-#include "../include/display/lv_objx/lv_label.h"
+#include "../../include/display/lvgl.h"
+#include "../../include/display/lv_objx/lv_label.h"
+#include "Fonts.hpp"
 
 namespace LouUI {
 

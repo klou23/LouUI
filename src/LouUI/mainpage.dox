@@ -1,0 +1,36 @@
+/** @mainpage LouUI
+ *
+ * @section introduction Introduction
+ *
+ * Welcome to LouUI. This is a library designed to make programming a UI on
+ * the VEX brain easier. It can be used in combination with the PROS library.
+ * This library is only compatible with C++ development, and not C.
+ * <br><br>
+ * Creating a UI is very useful because it allows for easy autonomous
+ * selection and can make debugging easier.
+ *
+ * @section installation Installation
+ *
+ * @subsection step1 Step 1: PROS Installation
+ *
+ * This step can be skipped if you already have PROS installed on your computer.
+ * <br><br>
+ * This library works with LVGL 5.3.1, which has been ported to VEX V5
+ * through the PROS library, so PROS must be installed. The installation
+ * guides for PROS on Windows, macOS, and Linux can be found on
+ * the PROS website
+ * <a href="https://pros.cs.purdue.edu/v5/getting-started/index.html">here</a>.
+ *
+ * @subsection step2 Step 2: Create a New PROS Project
+ *
+ * This step can be skipped if you already have a PROS project that you want
+ * to use LouUI with.
+ * <br><br>
+ * This library only works with a PROS project. With the PROS CLI installed,
+ * a new project can be created by running `pros conduct new-project .`
+ * in the directory you want the project to be created in.
+ *
+ * @subsection step3 Step 3: Adding Library
+ *
+ * @section usage Usage
+ */

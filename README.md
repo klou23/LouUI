@@ -51,14 +51,14 @@ object = object->setSize(50, 50)
                ->setColor(Color("BLUE"));
 ```
 
-#File Descriptions
+<h1>File Descriptions</h1>
 
 All files contains more detailed descriptions in file headers.
 
-###src/LouUI
+<h3>src/LouUI</h3>
 
 These files contain the whole library. `Display`, `Button`, `ToggleButton`, `Label`, and `DropDownMenu` files contain the respective UI elements. `Align`, `Color`, and `Fonts` files contain properties that are used in the UI elements. The Fonts folder contains all available font choices.
 
-###html
+<h3>html</h3>
 
 The html directory contains all of the generated Doxygen documentation for the project. `index.html` is the home page of the documentation.

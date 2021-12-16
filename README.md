@@ -39,17 +39,17 @@ Variable Declarations</h3>
 Modifying Object Properties</h3>
 <p>Object properties can be modified using the modifier methods. If only one property needs to be modified, the following syntax can be used.</p>
 
-```
-  object->setSize(50, 50);
+```C++
+object->setSize(50, 50);
 ```
  
 </div><!-- fragment --><p>If multiple object properties need to be set at once, LouUI contains an easy way to do this:</p>
 
-        object = object->setSize(50, 50)
-                       ->setPosition(10, 10)
-                       ->setColor(Color("BLUE"));
-
-
+```C++
+object = object->setSize(50, 50)
+               ->setPosition(10, 10)
+               ->setColor(Color("BLUE"));
+```
 
 #File Descriptions
 

@@ -38,8 +38,12 @@ Variable Declarations</h3>
 <h3><a class="anchor" id="modify"></a>
 Modifying Object Properties</h3>
 <p>Object properties can be modified using the modifier methods. If only one property needs to be modified, the following syntax can be used.</p>
-<div class="fragment"><div class="line"><span class="keywordtype">object</span>-&gt;setSize(50, 50);</div>
+```
+ object->setSize(50, 50);
+ ```
 </div><!-- fragment --><p>If multiple object properties need to be set at once, LouUI contains an easy way to do this:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">object</span> = <span class="keywordtype">object</span>-&gt;setSize(50, 50)</div>
-<div class="line">               -&gt;setPosition(10, 10)</div>
-<div class="line">               -&gt;setColor(Color(<span class="stringliteral">&quot;BLUE&quot;</span>));</div>
+```
+object = object->setSize(50, 50)
+               ->setPosition(10, 10)
+               ->setColor(Color("BLUE"));
+```

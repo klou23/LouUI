@@ -62,3 +62,20 @@ These files contain the whole library. `Display`, `Button`, `ToggleButton`, `Lab
 <h3>html</h3>
 
 The html directory contains all of the generated Doxygen documentation for the project. `index.html` is the home page of the documentation.
+
+<h1>Future work</h1>
+
+<h3>Bugs</h3>
+There are no currently known issues. If you find any feel free to create an issue. Or if you're feeling really brave, fix the bug yourself and create a pull request.
+
+<h3>Future Features</h3>
+Below are some future features that will hopefully be implemented (in no particular order):
+<ul>
+ <li>More fonts</li>
+ <li>Images</li>
+ <li>Switches</li>
+ <li>Text Boxes</li>
+ <li>Debuggers</li>
+</ul>
+<br>
+If there are any other features that you would like to see, please create an issue (or implement the feature yourself).

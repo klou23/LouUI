@@ -102,7 +102,13 @@ Variable Declarations</h3>
 <p>LouUI variables need to be persistent. This means that they cannot be local variables that are destroyed after a method is exited. Static variables, class member variables, and global variables all work. However, making all LouUI variables global is recommended because it allows the UI to be dynamically changed during runtime. This is generally being done by adding the <code>extern</code> keyword before variable declarations.</p>
 <h3><a class="anchor" id="modify"></a>
 Modifying Object Properties</h3>
-</div></div><!-- PageDoc -->
+<p>Object properties can be modified using the modifier methods. If only one property needs to be modified, the following syntax can be used.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">object</span>-&gt;setSize(50, 50);</div>
+</div><!-- fragment --><p>If multiple object properties need to be set at once, LouUI contains an easy way to do this:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">object</span> = <span class="keywordtype">object</span>-&gt;setSize(50, 50)</div>
+<div class="line">               -&gt;setPosition(10, 10)</div>
+<div class="line">               -&gt;setColor(Color(<span class="stringliteral">&quot;BLUE&quot;</span>));</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

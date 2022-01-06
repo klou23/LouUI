@@ -72,7 +72,20 @@
  * adding the `extern` keyword before variable declarations.
  *
  * @subsubsection modify Modifying Object Properties
+ * Object properties can be modified using the modifier methods. If only one
+ * property needs to be modified, the following syntax can be used.
  *
+ * @code
+ * object->setSize(50, 50);
+ * @endcode
  *
+ * If multiple object properties need to be set at once, LouUI contains an
+ * easy way to do this:
+ *
+ * @code
+ * object = object->setSize(50, 50)
+ *                ->setPosition(10, 10)
+ *                ->setColor(Color("BLUE"));
+ * @endcode
  *
  */

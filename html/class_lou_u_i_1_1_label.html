@@ -73,6 +73,11 @@ $(function() {
 <div class="title">LouUI::Label Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Displays strings on text on the screen.  
+ <a href="class_lou_u_i_1_1_label.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_label_8hpp_source.html">Label.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -105,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a30071dd043e2b95ddd3e237b35a6d1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a095ceb377586df2ca89a85e8c0774640"><td class="memItemLeft" align="right" valign="top">lv_style_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lou_u_i_1_1_label.html#a095ceb377586df2ca89a85e8c0774640">getStyle</a> () const</td></tr>
 <tr class="separator:a095ceb377586df2ca89a85e8c0774640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac425638bbf9d325e25f69faef3f02d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lou_u_i_1_1_label.html">Label</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lou_u_i_1_1_label.html#aac425638bbf9d325e25f69faef3f02d1">setColor</a> (<a class="el" href="class_lou_u_i_1_1_color.html">Color</a> c)</td></tr>
+<tr class="separator:aac425638bbf9d325e25f69faef3f02d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d09a0dd2dc42517b02d9e1b49a7a213"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lou_u_i_1_1_label.html">Label</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lou_u_i_1_1_label.html#a1d09a0dd2dc42517b02d9e1b49a7a213">setWidth</a> (int width)</td></tr>
 <tr class="separator:a1d09a0dd2dc42517b02d9e1b49a7a213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a522e5692c91df4a59d373deacb71cdef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lou_u_i_1_1_label.html">Label</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lou_u_i_1_1_label.html#a522e5692c91df4a59d373deacb71cdef">setX</a> (int x)</td></tr>
@@ -128,7 +135,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2cf28d897ca33d08752f32d90f7c7b94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lou_u_i_1_1_label.html">Label</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lou_u_i_1_1_label.html#a2cf28d897ca33d08752f32d90f7c7b94">setOpacity</a> (int opacity)</td></tr>
 <tr class="separator:a2cf28d897ca33d08752f32d90f7c7b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Displays strings on text on the screen. </p>
+<p>A <a class="el" href="class_lou_u_i_1_1_label.html" title="Displays strings on text on the screen.">Label</a> is the UI component to show simple text strings on the screen. </p>
+<h2><a class="anchor" id="usage"></a>
+Usage</h2>
+<h3><a class="anchor" id="settingText"></a>
+Setting Text</h3>
+<p>The text in the label can be set with the <code>setText</code> method. This will automatically allocate memory for the string to be copied into. Therefore, you don't need to keep the string you pass to <code>setText</code> in scope; local variables are fine. </p>
+<h3><a class="anchor" id="newline"></a>
+Newlines</h3>
+<p>Newlines can be created using the newline character: <code><br  />
+</code>. For example: <code>"line1\nline2\n\nline4"</code> </p>
+<h3><a class="anchor" id="longModes"></a>
+Long Modes</h3>
+<p>If the label contains lines that are wider than the label's width, there are several different long modes that allow for changing the formatting of these lines.</p><ul>
+<li>EXPAND</li>
+<li>BREAK</li>
+<li>SCROLL</li>
+<li>DOT</li>
+<li>ROLL</li>
+<li>CROP </li>
+</ul>
+<h2><a class="anchor" id="properties"></a>
+Properties</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a60f38133683280b033d8eb79358d9748"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a60f38133683280b033d8eb79358d9748">&#9670;&nbsp;</a></span>Label() <span class="overload">[1/2]</span></h2>
 
@@ -152,7 +183,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creates a new <a class="el" href="class_lou_u_i_1_1_label.html">Label</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Creates a new <a class="el" href="class_lou_u_i_1_1_label.html" title="Displays strings on text on the screen.">Label</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>The object the label is created in </td></tr>
   </table>
@@ -332,6 +363,25 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Getter for style </p>
+
+</div>
+</div>
+<a id="aac425638bbf9d325e25f69faef3f02d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac425638bbf9d325e25f69faef3f02d1">&#9670;&nbsp;</a></span>setColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_lou_u_i_1_1_label.html">LouUI::Label</a> * LouUI::Label::setColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_lou_u_i_1_1_color.html">LouUI::Color</a>&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the color of the label </p>
 
 </div>
 </div>

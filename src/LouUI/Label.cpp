@@ -44,7 +44,7 @@ LouUI::Label::Label(lv_obj_t *parent) : c("WHITE"){
 
 }
 
-LouUI::Label::Label(lv_obj_t *parent, LouUI::Label l) : c("Black"){
+LouUI::Label::Label(lv_obj_t *parent, LouUI::Label l) : c("WHITE"){
     obj = lv_label_create(parent, l.getObj());
     style = lv_label_get_style(obj);
 }
@@ -59,6 +59,13 @@ const LouUI::Color &LouUI::Label::getC() const {
 
 lv_style_t *LouUI::Label::getStyle() const {
     return style;
+}
+
+LouUI::Label *LouUI::Label::setColor(LouUI::Color c) {
+    this->c = c;
+    std::string text = c.hexString() + " " + text;
+    lv_label_set_text(obj, text.c_str());
+    return this;
 }
 
 LouUI::Label *LouUI::Label::setWidth(int width) {
@@ -94,6 +101,7 @@ yShift) {
 }
 
 LouUI::Label *LouUI::Label::setText(std::string text) {
+    this->text = text;
     text = c.hexString() + " " + text;
     lv_label_set_text(obj, text.c_str());
     return this;
@@ -140,5 +148,6 @@ LouUI::Label *LouUI::Label::setOpacity(int opacity) {
     lv_obj_refresh_style(obj);
     return this;
 }
+
 
 

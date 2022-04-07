@@ -1,12 +1,12 @@
 /**
- * @file Label.cpp
+ * @file Label.hpp
  * @brief Label class used to represent text labels
  * @details Header file for the Label class, which displays a string
  * of text on the screen
  * @author Kevin Lou
  * @date November 18, 2021
  *
- * Copyright (c) 2021 Kevin Lou
+ * @copyright Copyright (c) 2021 Kevin Lou
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +39,33 @@
 
 namespace LouUI {
 
+    /**
+     * @class Label
+     * @brief Displays strings on text on the screen
+     * @details
+     * A Label is the UI component to show simple text strings on the screen.
+     * @subsection usage Usage
+     * @subsubsection settingText Setting Text
+     * The text in the label can be set with the <code>setText</code> method.
+     * This will automatically allocate memory for the string to be copied into.
+     * Therefore, you don't need to keep the string you pass to <code>setText</code>
+     * in scope; local variables are fine.
+     * @subsubsection newline Newlines
+     * Newlines can be created using the newline character: <code>\n</code>.
+     * For example: <code>"line1\nline2\n\nline4"</code>
+     * @subsubsection longModes Long Modes
+     * If the label contains lines that are wider than the label's width, there
+     * are several different long modes that allow for changing the
+     * formatting of these lines.
+     * - EXPAND
+     * - BREAK
+     * - SCROLL
+     * - DOT
+     * - ROLL
+     * - CROP
+     * @subsection properties Properties
+     */
+
     class Label {
 
     public:
@@ -59,6 +86,7 @@ namespace LouUI {
 
     private:
         lv_obj_t *obj;
+        std::string text;
         Color c;
         lv_style_t *style;
 
@@ -91,6 +119,11 @@ namespace LouUI {
          * Getter for style
          */
         lv_style_t *getStyle() const;
+
+        /**
+         * Sets the color of the label
+         */
+        Label* setColor(Color c);
 
         /**
          * Sets the width of the label

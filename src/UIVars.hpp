@@ -6,17 +6,29 @@
 #include "LouUI/Button.hpp"
 #include "LouUI/ToggleButton.hpp"
 #include "LouUI/DropDownMenu.hpp"
+#include "LouUI/Chart.hpp"
 
 /**
  * UI objects
  */
 extern LouUI::Display display;
-extern LouUI::ToggleButton* redButton;
-extern LouUI::Label* redButtonLabel;
-extern LouUI::ToggleButton* blueButton;
-extern LouUI::Label* blueButtonLabel;
-extern LouUI::DropDownMenu* autonSelectMenu;
+extern LouUI::ToggleButton* leftButton;
+extern LouUI::ToggleButton* rightButton;
+extern LouUI::ToggleButton* progButton;
+extern LouUI::ToggleButton* auton1Button;
+extern LouUI::ToggleButton* auton2Button;
+extern LouUI::ToggleButton* auton3Button;
+extern LouUI::ToggleButton* auton4Button;
+extern LouUI::Label* leftButtonLabel;
+extern LouUI::Label* rightButtonLabel;
+extern LouUI::Label* progButtonLabel;
+extern LouUI::Label* auton1ButtonLabel;
+extern LouUI::Label* auton2ButtonLabel;
+extern LouUI::Label* auton3ButtonLabel;
+extern LouUI::Label* auton4ButtonLabel;
 extern LouUI::Label* autonDescription;
+
+extern LouUI::Chart* chart;
 
 #endif //LOUUI_UIVARS_HPP
 

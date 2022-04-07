@@ -1,22 +1,20 @@
 #include "Autonomous.hpp"
 
-AutonColor autonColor = NONE;
-int autonNumber = 1;
+Autonomous::AutonSide Autonomous::autonSide = NONE;
+int Autonomous::autonNumber = 1;
 
-std::string noAutonDescription = "No autonomous routine currently selected";
-std::string auton1Description = "First autonomous routine description";
-std::string auton2Description = "Second autonomous routine description";
-std::string progDescription = "Programming skills run description";
+std::string Autonomous::noAutonDescription = "No auton selected";
 
-/**
- * Runs the user autonomous code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the autonomous
- * mode. Alternatively, this function may be called in initialize or opcontrol
- * for non-competition testing purposes.
- *
- * If the robot is disabled or communications is lost, the autonomous task
- * will be stopped. Re-enabling the robot will restart the task, not re-start it
- * from where it left off.
- */
-void autonomous() {}
+std::string Autonomous::progDescription = "Prog Skills";
+
+std::string Autonomous::left1Description = "left1";
+std::string Autonomous::left2Description = "left2";
+std::string Autonomous::left3Description = "left3";
+std::string Autonomous::left4Description = "left4";
+
+std::string Autonomous::right1Description = "right1";
+std::string Autonomous::right2Description = "right2";
+std::string Autonomous::right3Description = "right3";
+std::string Autonomous::right4Description = "right4";
+
+

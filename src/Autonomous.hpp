@@ -3,21 +3,31 @@
 
 #include <string>
 
-/**Autonomous Enums**/
-enum AutonColor{
-    NONE,
-    RED,
-    BLUE
-};
+namespace Autonomous{
+    enum AutonSide{
+        LEFT,
+        RIGHT,
+        PROG,
+        NONE
+    };
 
-/**Autonomous Variables**/
-extern AutonColor autonColor;
-extern int autonNumber;
+    extern AutonSide autonSide;
+    extern int autonNumber;
 
-/**Autonomous Descriptions**/
-extern std::string noAutonDescription;
-extern std::string auton1Description;
-extern std::string auton2Description;
-extern std::string progDescription;
+    extern std::string noAutonDescription;
+
+    extern std::string progDescription;
+
+    extern std::string left1Description;
+    extern std::string left2Description;
+    extern std::string left3Description;
+    extern std::string left4Description;
+
+    extern std::string right1Description;
+    extern std::string right2Description;
+    extern std::string right3Description;
+    extern std::string right4Description;
+
+}
 
 #endif //LOUUI_AUTONOMOUS_HPP

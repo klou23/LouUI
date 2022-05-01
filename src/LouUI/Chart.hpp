@@ -58,6 +58,8 @@ namespace LouUI {
         Chart *setSize(int width, int height);
 
         Chart *align(lv_obj_t *ref, Align alignType);
+
+        Chart *setRange(int min, int max);
     };
 }
 

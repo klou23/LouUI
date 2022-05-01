@@ -44,3 +44,8 @@ LouUI::Chart *LouUI::Chart::align(lv_obj_t *ref, Align alignType) {
     lv_obj_align(obj, ref, alignType, 0, 0);
     return this;
 }
+
+LouUI::Chart *LouUI::Chart::setRange(int min, int max) {
+    lv_chart_set_range(obj, min, max);
+    return this;
+}

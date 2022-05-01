@@ -46,41 +46,86 @@ namespace LouUI {
      * A Label is the UI component to show simple text strings on the screen.
      * @subsection usage Usage
      * @subsubsection settingText Setting Text
-     * The text in the label can be set with the <code>setText</code> method.
+     * The text in the label can be set with the setText(std::string text) method.
      * This will automatically allocate memory for the string to be copied into.
-     * Therefore, you don't need to keep the string you pass to <code>setText</code>
-     * in scope; local variables are fine.
+     * Therefore, you don't need to keep the string you in scope;
+     * local variables are fine.
+     *
      * @subsubsection newline Newlines
-     * Newlines can be created using the newline character: <code>\n</code>.
+     * Newlines can be created using the newline character: <code>\\n</code>.
      * For example: <code>"line1\nline2\n\nline4"</code>
+     *
+     * @subsection properties Properties
+     *
      * @subsubsection longModes Long Modes
      * If the label contains lines that are wider than the label's width, there
-     * are several different long modes that allow for changing the
-     * formatting of these lines.
-     * - EXPAND
-     * - BREAK
-     * - SCROLL
-     * - DOT
-     * - ROLL
-     * - CROP
-     * @subsection properties Properties
+     * are several different #LongMode options that allow for changing the
+     * formatting of these lines. You can change between these long modes using
+     * the setLongMode(LongMode m) method.
+     *
+     * @subsubsection textAlign Text Align
+     * There are three different #TextAlign options. You can change the current
+     * text align option using the setTextAlign(TextAlign a) method.
+     *
+     * @subsubsection textColor Text Color
+     * The label text color can be changed to any LouUI::Color. This can be done
+     * using the setColor(Color c) method.
+     * The opacity of the label can also be changed using the setOpacity(int opacity)
+     * method.
+     *
+     * @subsubsection font Font
+     * The label's font size and font type (monospaced or variable-width) can be
+     * changed using the setFont(int size, bool mono) method.
+     *
+     * @subsubsection position Position
+     * The label's location consists of an x and y coordinate. These coordinates
+     * can be set individually using the setX(int x) and setY(int y) methods, or
+     * at the same time using the setPosition(int x, int y) method.
+     *
+     * The label can also be aligned to another UI object with the
+     * align(lv_obj_t *ref, Align alignType) or
+     * align(lv_obj_t * ref, Align alignType, int xShift, int yShift) method.
+     *
+     * @subsubsection size Size
+     * The width of the label can be set with the setWidth(int width) method. If
+     * the label's long mode is EXPAND, the label's width may end up being greater
+     * than this set value.
+     * The height of the label is automatically decided based on the text displayed
+     * by the label.
      */
 
     class Label {
 
     public:
+        /**
+         * @enum LongMode
+         * @brief Different ways of dealing with lines that are too long
+         */
         enum LongMode{
+            /**Expands the label size to the text size (Default)*/
             EXPAND,
+            /**Wrap the lines and expand the label height*/
             BREAK,
+            /**Scroll the label text back and forth*/
             SCROLL,
+            /**Keep the label size, replace overflowing text with dots*/
             DOT,
+            /**Keep the size and roll the text circularly*/
             ROLL,
+            /**Keep the label size and crop out overflowing text*/
             CROP,
         };
 
+        /**
+         * @enum TextAlign
+         * @brief Different text alignment options
+         */
         enum TextAlign{
+            /**Left Align (Default)**/
             LEFT,
+            /**Center Align**/
             CENTER,
+            /**Right Align*/
             RIGHT,
         };
 

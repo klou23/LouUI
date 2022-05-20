@@ -11,14 +11,8 @@ lv_style_t *LouUI::Chart::getStyle() const {
     return style;
 }
 
-LouUI::Chart *LouUI::Chart::addData(int16_t value) {
-    lv_chart_set_next(obj, data, value);
-    return this;
-}
-
 LouUI::Chart::Chart(lv_obj_t *parent) {
     obj = lv_chart_create(parent, nullptr);
-    data = lv_chart_add_series(obj, LV_COLOR_RED);
     style = (lv_style_t *)(std::malloc(sizeof(lv_style_t)));
     lv_style_copy(style, &lv_style_plain);
     lv_chart_set_style(obj, style);
@@ -26,7 +20,6 @@ LouUI::Chart::Chart(lv_obj_t *parent) {
 
 LouUI::Chart::Chart(lv_obj_t *parent, LouUI::Chart c) {
     obj = lv_chart_create(parent, c.getObj());
-    data = lv_chart_add_series(obj, LV_COLOR_RED);
     style = lv_chart_get_style(obj);
 }
 
@@ -48,4 +41,21 @@ LouUI::Chart *LouUI::Chart::align(lv_obj_t *ref, Align alignType) {
 LouUI::Chart *LouUI::Chart::setRange(int min, int max) {
     lv_chart_set_range(obj, min, max);
     return this;
+}
+
+LouUI::Chart *LouUI::Chart::addSeries(std::string name, LouUI::Color c) {
+    if(data.count(name)) throw std::invalid_argument("Series already exists");
+    data[name] = lv_chart_add_series(obj, c.toLvColor());
+    return this;
+}
+
+LouUI::Chart *LouUI::Chart::addData(std::string series, int16_t value) {
+    lv_chart_series_t *s = getSeries(series);
+    lv_chart_set_next(obj, s, value);
+    return this;
+}
+
+lv_chart_series_t *LouUI::Chart::getSeries(std::string name) {
+    if(data.count(name)) return data[name];
+    throw std::invalid_argument("Invalid series name");
 }

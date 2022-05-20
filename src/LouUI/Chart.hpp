@@ -32,6 +32,9 @@
 #include "Align.hpp"
 #include "../../include/display/lv_core/lv_obj.h"
 #include "../../include/display/lv_objx/lv_chart.h"
+#include "Color.hpp"
+
+#include <unordered_map>
 
 namespace LouUI {
     class Chart {
@@ -39,26 +42,74 @@ namespace LouUI {
     private:
         lv_obj_t *obj;
         lv_style_t *style;
-        lv_chart_series_t *data;
+        std::unordered_map<std::string, lv_chart_series_t*> data;
 
     public:
 
+        /**
+         * Creates a new Chart
+         * @param parent The object the chart is created in
+         */
         explicit Chart(lv_obj_t *parent);
 
+        /**
+         * Creates a new Chart as a copy of another Chart
+         * @param parent The object the chart is created in
+         * @param c The chart from which the copy is made
+         */
         Chart(lv_obj_t *parent, Chart c);
 
+        /**
+         * Getter for obj
+         */
         lv_obj_t *getObj() const;
 
+        /**
+         * Getter for style
+         */
         lv_style_t *getStyle() const;
 
-        Chart *addData(int16_t value);
+        /**
+         * Add a new series to the chart
+         * @param name desired series name
+         * @param c color for the series
+         */
+        Chart *addSeries(std::string name, LouUI::Color c);
 
+        /**
+         * Getter for a specific series
+         * @param name name of the series to get
+         */
+        lv_chart_series_t *getSeries(std::string name);
+
+        /**
+         * Add a data point to a series
+         * @param series series name
+         * @param value data point value
+         */
+        Chart *addData(std::string series, int16_t value);
+
+        /**
+         * Set the amount of points for the chart. Affects all series in the
+         * chart
+         */
         Chart *setPointCount(int points);
 
+        /**
+         * Sets the dimensions of the chart
+         */
         Chart *setSize(int width, int height);
 
+        /**
+         * Aligns the chart to another object
+         * @param ref object to align to
+         * @param alignType type of alignment
+         */
         Chart *align(lv_obj_t *ref, Align alignType);
 
+        /**
+         * Sets the bounds of the chart (y-values)
+         */
         Chart *setRange(int min, int max);
     };
 }

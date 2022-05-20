@@ -68,7 +68,7 @@ int LouUI::Display::getScreenCount() {
 
 lv_obj_t *LouUI::Display::getScreen(const std::string &name) {
     if(screens.count(name)) return screens[name];
-    return nullptr;
+    throw std::invalid_argument("Invalid screen name");
 }
 
 void LouUI::Display::initFonts() {

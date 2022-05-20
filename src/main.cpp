@@ -189,7 +189,7 @@ void opcontrol() {
         val += add;
         if(val > 99) add = -3;
         if(val < 1) add = 3;
-        chart->addData(val);
+//        chart->addData(val);
     }
 
 }

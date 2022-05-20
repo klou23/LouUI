@@ -6,7 +6,7 @@
  * @author Kevin Lou
  * @date November 25, 2021
  *
- * Copyright (c) 2021 Kevin Lou
+ * @copyright Copyright (c) 2021 Kevin Lou
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,14 @@
 #include "Align.hpp"
 
 namespace LouUI {
+    /**
+     * @class Button
+     * @brief Class for adding buttons to the screen
+     * @details
+     * A button is the LouUI object to add non-toggleable buttons to the screen
+     * @subsection usage Usage
+     * 
+     */
     class Button {
     public:
 

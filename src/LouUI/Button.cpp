@@ -6,7 +6,7 @@
  * @author Kevin Lou
  * @date November 25, 2021
  *
- * Copyright (c) 2021 Kevin Lou
+ * @copyright Copyright (c) 2021 Kevin Lou
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

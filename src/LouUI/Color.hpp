@@ -34,33 +34,85 @@
 #include "../include/display/lvgl.h"
 
 namespace LouUI {
+
+    /**
+     * @class Color
+     * @brief Represents an 24-bit color
+     */
+
     class Color {
     private:
-
+        /**
+         * Red-value in the color
+         */
         int r;
+        /**
+         * Green-value in the color
+         */
         int g;
+        /**
+         * Blue-value in the color
+         */
         int b;
 
     public:
 
+        /**
+         * Create a new color from a hex-value or a given color name
+         * @param color Either the hex string for the color or one of the
+         * following color names:
+         * - BLACK
+         * - RED
+         * - GREEN
+         * - BLUE
+         * - FUCHSIA
+         * - WHITE
+         * - YELLOW
+         * - PURPLE
+         * - MAROON
+         * - OLIVE
+         */
         Color(std::string color);
 
+        /**
+         * Create a new color with the given R, G, and B values
+         */
         Color(int r, int g, int b);
 
+        /**
+         * Getter for red
+         */
         int getR() const;
-
+        /**
+         * Setter for red
+         */
         void setR(int r);
-
+        /**
+         * Getter for green
+         */
         int getG() const;
-
+        /**
+         * Setter for green
+         */
         void setG(int g);
-
+        /**
+         * Getter for blue
+         */
         int getB() const;
-
+        /**
+         * Setter for blue
+         * @param b
+         */
         void setB(int b);
 
+        /**
+         * Returns the hexString for the color
+         */
         std::string hexString() const;
 
+        /**
+         * Returns the lvgl equivalent of the color
+         */
         lv_color_t toLvColor();
     };
 }

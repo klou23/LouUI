@@ -132,7 +132,8 @@ void initialize() {
     chart = (new LouUI::Chart(display.getScreen("Chart")))
             ->setSize(400, 160)
             ->align(display.getScreen("Chart"), LouUI::Align::CENTER)
-            ->setPointCount(300);
+            ->setPointCount(300)
+            ->addSeries("Data", LouUI::Color("RED"));
 }
 
 /**
@@ -189,7 +190,7 @@ void opcontrol() {
         val += add;
         if(val > 99) add = -3;
         if(val < 1) add = 3;
-//        chart->addData(val);
+        chart->addData("data", val);
     }
 
 }
